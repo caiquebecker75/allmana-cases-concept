@@ -46,12 +46,15 @@ function norm(s){s=(s||"").toString().toLowerCase();
  return"experiencia";}
 var PLAY='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>';
 function esc(s){return(s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+var _szT=0;
+function postSize(){try{var h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent.postMessage({type:"allmanaCasesHeight",height:h},"*");}catch(_){}}
+function queueSize(){clearTimeout(_szT);_szT=setTimeout(postSize,60);}
 function render(){
  var f=document.getElementById("filters");f.innerHTML="";
  CATS.forEach(function(c){var b=document.createElement("button");b.className="chip"+(c[0]===CUR?" active":"");b.textContent=c[1];b.onclick=function(){CUR=c[0];render();};f.appendChild(b);});
  var g=document.getElementById("grid");g.innerHTML="";
  var items=DATA.filter(function(d){return CUR==="todos"||norm(d.categoria)===CUR;});
- if(!items.length){g.innerHTML='<div class="note">Nenhum case nesta categoria.</div>';return;}
+ if(!items.length){g.innerHTML='<div class="note">Nenhum case nesta categoria.</div>';queueSize();return;}
  items.forEach(function(d){
   var mp=[];if(d.local)mp.push(esc(d.local));if(d.ano)mp.push(esc(d.ano));
   var meta=mp.join('<i></i>');
@@ -60,13 +63,17 @@ function render(){
   el.innerHTML='<div class="thumb">'+(d.categoria?'<span class="cat">'+esc(d.categoria)+'</span>':'')+'<span class="play">'+PLAY+'</span>'+(d.capa?'<img src="'+esc(d.capa)+'" alt="'+esc(d.title)+'" loading="lazy">':'')+'</div><div class="body">'+(d.cliente?'<div class="client">'+esc(d.cliente)+'</div>':'')+'<h3>'+esc(d.title)+'</h3>'+(meta?'<div class="meta">'+meta+'</div>':'')+'</div>';
   g.appendChild(el);
  });
+ queueSize();
 }
 window.onmessage=function(e){var m=e.data;if(!m)return;
  if(m.type==="cases"&&m.items){DATA=m.items;render();}
  else if(Array.isArray(m)){DATA=m;render();}};
+document.addEventListener("load",queueSize,true);
+window.addEventListener("resize",queueSize);
+if(window.ResizeObserver){try{new ResizeObserver(queueSize).observe(document.body);}catch(_){}}
 render();
 fetch("data.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(j){if(j&&j.length){DATA=j;render();}}).catch(function(){});
-function ping(){try{window.parent.postMessage("ready","*");}catch(_){}}
-ping();setTimeout(ping,400);setTimeout(ping,1200);
+function ping(){try{window.parent.postMessage("ready","*");}catch(_){}postSize();}
+ping();setTimeout(ping,400);setTimeout(ping,1200);setTimeout(postSize,2500);
 </script>
 </body></html>
