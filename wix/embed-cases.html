@@ -67,7 +67,7 @@ function render(){
   var mp=[];if(d.local)mp.push(esc(d.local));if(d.ano)mp.push(esc(d.ano));
   var meta=mp.join('<i></i>');
   var el=document.createElement("a");el.className="card";
-  if(d.video){el.href="watch.html?v="+encodeURIComponent(d.video)+"&t="+encodeURIComponent(d.title||"")+"&c="+encodeURIComponent(d.cliente||"");el.target="_blank";el.rel="noopener";}else{el.href="javascript:void(0)";}
+  if(d.video){el.href=watchUrl(d);el.target="_blank";el.rel="noopener";el.onclick=function(ev){playCase(d,ev);};}else{el.href="javascript:void(0)";}
   el.innerHTML='<div class="thumb">'+(d.categoria?'<span class="cat">'+esc(d.categoria)+'</span>':'')+(d.video?'<span class="play">'+PLAY+'</span>':'')+(d.capa?'<img src="'+esc(d.capa)+'" alt="'+esc(d.title)+'" loading="lazy">':'')+'</div><div class="body">'+(d.cliente?'<div class="client">'+esc(d.cliente)+'</div>':'')+'<h3>'+esc(d.title)+'</h3>'+(meta?'<div class="meta">'+meta+'</div>':'')+'</div>';
   if(!d.video)el.style.cursor='default';
   g.appendChild(el);
@@ -82,13 +82,29 @@ window.addEventListener("resize",queueSize);
 if(window.ResizeObserver){try{new ResizeObserver(queueSize).observe(document.body);}catch(_){}}
 render();
 fetch("data.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(j){if(j&&j.length){DATA=j;render();}}).catch(function(){});
-function reqFS(v,lb){try{
- if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();return true;}
- if(v.requestFullscreen){v.requestFullscreen();return true;}
- if(v.webkitRequestFullscreen){v.webkitRequestFullscreen();return true;}
- if(lb.requestFullscreen){lb.requestFullscreen();return true;}
-}catch(_){}return false;}
-function openLB(url){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;v.src=url;lb.classList.add("open");try{v.currentTime=0;}catch(_){}var p=v.play();if(p&&p.catch)p.catch(function(){});if(v.readyState>=1)reqFS(v,lb);else v.addEventListener("loadedmetadata",function(){reqFS(v,lb);},{once:true});}
+function watchUrl(d){return "watch.html?v="+encodeURIComponent(d.video)+"&t="+encodeURIComponent(d.title||"")+"&c="+encodeURIComponent(d.cliente||"");}
+function newtab(d){try{window.open(watchUrl(d),"_blank","noopener");}catch(_){location.href=watchUrl(d);}}
+function playCase(d,ev){
+ var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");
+ if(!v||!d.video)return;
+ if(ev)ev.preventDefault();
+ v.src=d.video;lb.classList.add("open");
+ var p=v.play();if(p&&p.catch)p.catch(function(){});
+ try{
+  if(v.webkitEnterFullscreen){ // iOS Safari
+   var go=function(){try{v.webkitEnterFullscreen();}catch(_){}};
+   if(v.readyState>=1)go();else v.addEventListener("loadedmetadata",go,{once:true});
+   return;
+  }
+  if(v.requestFullscreen){
+   var fp=v.requestFullscreen();
+   if(fp&&fp.catch)fp.catch(function(){lb.classList.remove("open");try{v.pause();}catch(_){}newtab(d);});
+   return;
+  }
+  if(v.webkitRequestFullscreen){v.webkitRequestFullscreen();return;}
+ }catch(_){}
+ lb.classList.remove("open");newtab(d);
+}
 function closeLB(){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;lb.classList.remove("open");try{v.pause();}catch(_){}v.removeAttribute("src");v.load();try{if(document.fullscreenElement)document.exitFullscreen();else if(document.webkitFullscreenElement)document.webkitExitFullscreen();}catch(_){}}
 (function(){var c=document.getElementById("lbClose"),lb=document.getElementById("lb"),vv=document.getElementById("lbVideo");if(c)c.onclick=closeLB;if(lb)lb.onclick=function(e){if(e.target===lb)closeLB();};document.addEventListener("keydown",function(e){if(e.key==="Escape"||e.keyCode===27)closeLB();});document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&lb.classList.contains("open"))closeLB();});document.addEventListener("webkitfullscreenchange",function(){if(!document.webkitFullscreenElement&&lb.classList.contains("open"))closeLB();});if(vv)vv.addEventListener("webkitendfullscreen",closeLB);})();
 function ping(){try{window.parent.postMessage("ready","*");}catch(_){}postSize();}
