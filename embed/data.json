@@ -43,5 +43,50 @@
 "ano": "",
 "capa": "img/dpsp.jpg",
 "video": ""
+},
+{
+"title": "Experiência Embark Beyond",
+"categoria": "Experiência",
+"cliente": "Embark Beyond",
+"local": "",
+"ano": "",
+"capa": "img/embark.jpg",
+"video": ""
+},
+{
+"title": "Estande Bett Educar",
+"categoria": "Experiência",
+"cliente": "Forma Turismo",
+"local": "",
+"ano": "",
+"capa": "img/forma.jpg",
+"video": ""
+},
+{
+"title": "Copa FVC Bariloche",
+"categoria": "Incentivo",
+"cliente": "Grupo Boticário",
+"local": "",
+"ano": "",
+"capa": "img/boticario-bariloche.jpg",
+"video": ""
+},
+{
+"title": "Encontro VD Natal",
+"categoria": "Convenção",
+"cliente": "Grupo Boticário",
+"local": "",
+"ano": "",
+"capa": "img/boticario-vdnatal.jpg",
+"video": ""
+},
+{
+"title": "Força VD Foz do Iguaçu",
+"categoria": "Convenção",
+"cliente": "Grupo Boticário",
+"local": "",
+"ano": "",
+"capa": "img/boticario-foz.jpg",
+"video": ""
 }
 ]
