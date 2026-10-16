@@ -67,7 +67,7 @@ function render(){
   var mp=[];if(d.local)mp.push(esc(d.local));if(d.ano)mp.push(esc(d.ano));
   var meta=mp.join('<i></i>');
   var el=document.createElement("a");el.className="card";
-  if(d.video){el.href=d.video;el.target="_blank";el.rel="noopener";el.onclick=function(ev){ev.preventDefault();openLB(d.video);};}else{el.href="javascript:void(0)";}
+  if(d.video){el.href="watch.html?v="+encodeURIComponent(d.video)+"&t="+encodeURIComponent(d.title||"")+"&c="+encodeURIComponent(d.cliente||"");el.target="_blank";el.rel="noopener";}else{el.href="javascript:void(0)";}
   el.innerHTML='<div class="thumb">'+(d.categoria?'<span class="cat">'+esc(d.categoria)+'</span>':'')+(d.video?'<span class="play">'+PLAY+'</span>':'')+(d.capa?'<img src="'+esc(d.capa)+'" alt="'+esc(d.title)+'" loading="lazy">':'')+'</div><div class="body">'+(d.cliente?'<div class="client">'+esc(d.cliente)+'</div>':'')+'<h3>'+esc(d.title)+'</h3>'+(meta?'<div class="meta">'+meta+'</div>':'')+'</div>';
   if(!d.video)el.style.cursor='default';
   g.appendChild(el);

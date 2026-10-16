@@ -1,0 +1,41 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Allmana · Case</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#FFB000}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;color:#fff;font-family:'Poppins',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column;min-height:100vh}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px}
+.brand{font-weight:700;letter-spacing:.02em;font-size:18px}
+.brand b{color:var(--gold);font-weight:700}
+.close{color:#bbb;text-decoration:none;font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:999px;transition:.2s}
+.close:hover{color:#000;background:var(--gold);border-color:var(--gold)}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:0 16px 10px}
+.wrap{width:100%;max-width:1000px;text-align:center}
+.client{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a8a8a;font-weight:600}
+h1{font-size:clamp(20px,3.4vw,30px);font-weight:700;margin:6px 0 16px}
+video{width:100%;max-height:72vh;border-radius:14px;background:#000;display:block;outline:none}
+.note{color:#777;font-size:13px;padding:14px 0 22px;text-align:center}
+.note a{color:var(--gold);text-decoration:none}
+</style></head>
+<body>
+<div class="top"><div class="brand">all<b>mana</b></div><a class="close" href="javascript:window.close()">Fechar ✕</a></div>
+<div class="stage"><div class="wrap">
+  <div class="client" id="client"></div>
+  <h1 id="title">Case</h1>
+  <video id="v" controls autoplay playsinline preload="auto"></video>
+</div></div>
+<div class="note" id="note"></div>
+<script>
+(function(){
+ function q(k){try{return new URLSearchParams(location.search).get(k)||"";}catch(_){return"";}}
+ var v=q("v"),t=q("t"),c=q("c");
+ if(t){document.getElementById("title").textContent=t;document.title="Allmana · "+t;}
+ if(c)document.getElementById("client").textContent=c;
+ var vid=document.getElementById("v");
+ if(v){vid.src=v;var p=vid.play();if(p&&p.catch)p.catch(function(){});}
+ else{document.getElementById("note").innerHTML='Vídeo não encontrado.';}
+}());
+</script>
+</body></html>
