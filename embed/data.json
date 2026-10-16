@@ -88,5 +88,41 @@
 "ano": "",
 "capa": "img/boticario-foz.jpg",
 "video": ""
+},
+{
+"title": "Consegne Salvador",
+"categoria": "Premiação",
+"cliente": "MAG Seguros",
+"local": "",
+"ano": "",
+"capa": "img/mag.jpg",
+"video": ""
+},
+{
+"title": "Prêmio Caio",
+"categoria": "Premiação",
+"cliente": "Allmana",
+"local": "",
+"ano": "",
+"capa": "img/premiocaio.jpg",
+"video": ""
+},
+{
+"title": "Convenção Vedacit",
+"categoria": "Convenção",
+"cliente": "Vedacit",
+"local": "",
+"ano": "",
+"capa": "img/vedacit.jpg",
+"video": ""
+},
+{
+"title": "Top Club Bento Gonçalves",
+"categoria": "Incentivo",
+"cliente": "Whirlpool",
+"local": "",
+"ano": "",
+"capa": "img/whirlpool.jpg",
+"video": ""
 }
 ]
