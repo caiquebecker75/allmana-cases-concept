@@ -1,3 +1,20 @@
 [
-  {"title":"Programa de Excelência","categoria":"Premiação","cliente":"ArcelorMittal","local":"","ano":"","capa":"img/arcelormittal.jpg","video":""}
+{
+"title": "Programa de Excelência",
+"categoria": "Premiação",
+"cliente": "ArcelorMittal",
+"local": "",
+"ano": "",
+"capa": "img/arcelormittal.jpg",
+"video": ""
+},
+{
+"title": "Asaas Conect",
+"categoria": "Convenção",
+"cliente": "Asaas",
+"local": "",
+"ano": "",
+"capa": "img/asaas.jpg",
+"video": ""
+}
 ]
