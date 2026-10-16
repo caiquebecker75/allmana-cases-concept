@@ -82,9 +82,15 @@ window.addEventListener("resize",queueSize);
 if(window.ResizeObserver){try{new ResizeObserver(queueSize).observe(document.body);}catch(_){}}
 render();
 fetch("data.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(j){if(j&&j.length){DATA=j;render();}}).catch(function(){});
-function openLB(url){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;v.src=url;lb.classList.add("open");try{v.currentTime=0;v.play();}catch(_){}}
-function closeLB(){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;lb.classList.remove("open");try{v.pause();}catch(_){}v.removeAttribute("src");v.load();}
-(function(){var c=document.getElementById("lbClose"),lb=document.getElementById("lb");if(c)c.onclick=closeLB;if(lb)lb.onclick=function(e){if(e.target===lb)closeLB();};document.addEventListener("keydown",function(e){if(e.key==="Escape"||e.keyCode===27)closeLB();});})();
+function reqFS(v,lb){try{
+ if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();return true;}
+ if(v.requestFullscreen){v.requestFullscreen();return true;}
+ if(v.webkitRequestFullscreen){v.webkitRequestFullscreen();return true;}
+ if(lb.requestFullscreen){lb.requestFullscreen();return true;}
+}catch(_){}return false;}
+function openLB(url){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;v.src=url;lb.classList.add("open");try{v.currentTime=0;}catch(_){}var p=v.play();if(p&&p.catch)p.catch(function(){});if(v.readyState>=1)reqFS(v,lb);else v.addEventListener("loadedmetadata",function(){reqFS(v,lb);},{once:true});}
+function closeLB(){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;lb.classList.remove("open");try{v.pause();}catch(_){}v.removeAttribute("src");v.load();try{if(document.fullscreenElement)document.exitFullscreen();else if(document.webkitFullscreenElement)document.webkitExitFullscreen();}catch(_){}}
+(function(){var c=document.getElementById("lbClose"),lb=document.getElementById("lb"),vv=document.getElementById("lbVideo");if(c)c.onclick=closeLB;if(lb)lb.onclick=function(e){if(e.target===lb)closeLB();};document.addEventListener("keydown",function(e){if(e.key==="Escape"||e.keyCode===27)closeLB();});document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&lb.classList.contains("open"))closeLB();});document.addEventListener("webkitfullscreenchange",function(){if(!document.webkitFullscreenElement&&lb.classList.contains("open"))closeLB();});if(vv)vv.addEventListener("webkitendfullscreen",closeLB);})();
 function ping(){try{window.parent.postMessage("ready","*");}catch(_){}postSize();}
 ping();setTimeout(ping,400);setTimeout(ping,1200);setTimeout(postSize,2500);
 </script>
