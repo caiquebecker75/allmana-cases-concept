@@ -1,0 +1,103 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Allmana · Cases (prévia)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#FFB000;--panel:#0f0f0f;--line:rgba(255,255,255,.1);--txt:#fff;--muted:#9a9a9a;--muted2:#707070}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000;color:var(--txt);font-family:'Poppins',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px 40px}
+.pbar{max-width:1200px;margin:0 auto;padding:22px 20px 6px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pbar img{height:26px;width:auto;display:block}
+.pbar .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(255,176,0,.5);padding:5px 12px;border-radius:999px;font-weight:600}
+.head{max-width:1200px;margin:0 auto;padding:14px 20px 26px}
+.head h1{font-size:clamp(30px,6vw,56px);font-weight:700;letter-spacing:.02em;margin:0}
+.head p{color:var(--muted);font-size:14px;margin:8px 0 0}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 30px}
+.chip{font-size:14px;font-weight:600;color:var(--muted);padding:9px 20px;border:1px solid var(--line);border-radius:999px;background:transparent;cursor:pointer;transition:.2s;font-family:inherit}
+.chip:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.chip.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s;cursor:pointer;text-decoration:none;color:inherit}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,176,0,.5)}
+.thumb{position:relative;aspect-ratio:3/2;overflow:hidden;background:#111}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover .thumb img{transform:scale(1.08)}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),rgba(0,0,0,0) 55%)}
+.cat{position:absolute;top:14px;left:14px;z-index:2;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#000;background:var(--gold);padding:5px 12px;border-radius:999px}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:54px;height:54px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);display:grid;place-items:center;background:rgba(0,0,0,.25);transition:.3s}
+.card:hover .play{background:var(--gold);border-color:var(--gold);transform:translate(-50%,-50%) scale(1.08)}
+.play svg{width:18px;height:18px;margin-left:3px;fill:#fff;transition:.3s}
+.card:hover .play svg{fill:#000}
+.body{padding:20px}
+.client{font-size:12px;color:var(--muted2);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.card h3{font-size:19px;font-weight:700;margin:8px 0 0;line-height:1.25}
+.credit{display:flex;gap:7px;align-items:center;margin-top:12px;font-size:12px;color:var(--muted)}
+.credit b{width:4px;height:4px;border-radius:50%;background:var(--gold);display:inline-block}
+.credit.empty{color:#5a5a5a;font-style:italic}
+.note{color:var(--muted);padding:34px 0;text-align:center;font-size:14px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.filters{margin-bottom:22px}.wrap{padding:0 16px 32px}.pbar,.head{padding-left:16px;padding-right:16px}}
+.lb{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.open{display:flex}
+.lb-inner{position:relative;width:100%;max-width:980px}
+.lb video{width:100%;max-height:84vh;border-radius:12px;background:#000;display:block;outline:none}
+.lb-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.4);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:.2s;font-family:inherit}
+.lb-close:hover{background:var(--gold);color:#000;border-color:var(--gold)}
+@media(max-width:560px){.lb{padding:14px}.lb-close{top:-42px}}
+</style></head>
+<body>
+<div class="pbar"><img src="logo-allmana.png" alt="Allmana"><span class="tag">Prévia · não publicado</span></div>
+<div class="head"><h1>CASES</h1><p>Prévia para aprovação da Allmana. Clique num case para assistir ao vídeo.</p></div>
+<div class="wrap">
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"><div class="note">Carregando cases...</div></div>
+</div>
+<div class="lb" id="lb"><div class="lb-inner"><button class="lb-close" id="lbClose" aria-label="Fechar">&times;</button><video id="lbVideo" controls playsinline preload="metadata"></video></div></div>
+<script>
+var CATS=[["todos","Todos"],["minimeeting","Mini Meeting"],["corporativo","Corporativo"],["convencao","Convenção"],["estandes","Estandes"],["incentivo","Incentivo"]];
+var DATA=[],CUR="todos";
+function norm(s){s=(s||"").toString().toLowerCase();
+ if(s.indexOf("mini")>=0)return"minimeeting";
+ if(s.indexOf("corporativ")>=0)return"corporativo";
+ if(s.indexOf("conven")>=0)return"convencao";
+ if(s.indexOf("estande")>=0)return"estandes";
+ if(s.indexOf("incentiv")>=0)return"incentivo";
+ return"";}
+var PLAY='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>';
+function esc(s){return(s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function render(){
+ var f=document.getElementById("filters");f.innerHTML="";
+ CATS.forEach(function(c){var b=document.createElement("button");b.className="chip"+(c[0]===CUR?" active":"");b.textContent=c[1];b.onclick=function(){CUR=c[0];render();};f.appendChild(b);});
+ var g=document.getElementById("grid");g.innerHTML="";
+ var items=DATA.filter(function(d){return CUR==="todos"||norm(d.categoria)===CUR;});
+ if(!items.length){g.innerHTML='<div class="note">Nenhum case nesta categoria.</div>';return;}
+ items.forEach(function(d){
+  var cr=(d.credito||"").trim();
+  var credHtml=cr?('<div class="credit"><b></b>'+esc(cr)+'</div>'):('<div class="credit empty"><b></b>Crédito a definir</div>');
+  var el=document.createElement("a");el.className="card";
+  if(d.video){el.href=watchUrl(d);el.target="_blank";el.rel="noopener";el.onclick=function(ev){playCase(d,ev);};}else{el.href="javascript:void(0)";el.style.cursor='default';}
+  el.innerHTML='<div class="thumb">'+(d.categoria?'<span class="cat">'+esc(d.categoria)+'</span>':'')+(d.video?'<span class="play">'+PLAY+'</span>':'')+(d.capa?'<img src="'+esc(d.capa)+'" alt="'+esc(d.title)+'" loading="lazy">':'')+'</div><div class="body">'+(d.cliente?'<div class="client">'+esc(d.cliente)+'</div>':'')+'<h3>'+esc(d.title)+'</h3>'+credHtml+'</div>';
+  g.appendChild(el);
+ });
+}
+render();
+fetch("data-preview.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(j){if(j&&j.length){DATA=j;render();}}).catch(function(){});
+function watchUrl(d){return "watch.html?v="+encodeURIComponent(d.video)+"&t="+encodeURIComponent(d.title||"")+"&c="+encodeURIComponent(d.cliente||"")+"&cr="+encodeURIComponent(d.credito||"");}
+function newtab(d){try{window.open(watchUrl(d),"_blank","noopener");}catch(_){location.href=watchUrl(d);}}
+function playCase(d,ev){
+ var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");
+ if(!v||!d.video)return;
+ if(ev)ev.preventDefault();
+ v.src=d.video;lb.classList.add("open");
+ var p=v.play();if(p&&p.catch)p.catch(function(){});
+ try{
+  if(v.webkitEnterFullscreen){var go=function(){try{v.webkitEnterFullscreen();}catch(_){}};if(v.readyState>=1)go();else v.addEventListener("loadedmetadata",go,{once:true});return;}
+  if(v.requestFullscreen){var fp=v.requestFullscreen();if(fp&&fp.catch)fp.catch(function(){lb.classList.remove("open");try{v.pause();}catch(_){}newtab(d);});return;}
+  if(v.webkitRequestFullscreen){v.webkitRequestFullscreen();return;}
+ }catch(_){}
+ lb.classList.remove("open");newtab(d);
+}
+function closeLB(){var lb=document.getElementById("lb"),v=document.getElementById("lbVideo");if(!lb||!v)return;lb.classList.remove("open");try{v.pause();}catch(_){}v.removeAttribute("src");v.load();try{if(document.fullscreenElement)document.exitFullscreen();else if(document.webkitFullscreenElement)document.webkitExitFullscreen();}catch(_){}}
+(function(){var c=document.getElementById("lbClose"),lb=document.getElementById("lb"),vv=document.getElementById("lbVideo");if(c)c.onclick=closeLB;if(lb)lb.onclick=function(e){if(e.target===lb)closeLB();};document.addEventListener("keydown",function(e){if(e.key==="Escape"||e.keyCode===27)closeLB();});document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&lb.classList.contains("open"))closeLB();});document.addEventListener("webkitfullscreenchange",function(){if(!document.webkitFullscreenElement&&lb.classList.contains("open"))closeLB();});if(vv)vv.addEventListener("webkitendfullscreen",closeLB);})();
+</script>
+</body></html>
