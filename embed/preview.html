@@ -73,7 +73,7 @@ function render(){
  if(!items.length){g.innerHTML='<div class="note">Nenhum case nesta categoria.</div>';return;}
  items.forEach(function(d){
   var cr=(d.credito||"").trim();
-  var credHtml=cr?('<div class="credit"><b></b>'+esc(cr)+'</div>'):('<div class="credit empty"><b></b>Crédito a definir</div>');
+  var credHtml=d.semCredito?'':(cr?('<div class="credit"><b></b>'+esc(cr)+'</div>'):('<div class="credit empty"><b></b>Crédito a definir</div>'));
   var el=document.createElement("a");el.className="card";
   if(d.video){el.href=watchUrl(d);el.target="_blank";el.rel="noopener";el.onclick=function(ev){playCase(d,ev);};}else{el.href="javascript:void(0)";el.style.cursor='default';}
   el.innerHTML='<div class="thumb">'+(d.categoria?'<span class="cat">'+esc(d.categoria)+'</span>':'')+(d.video?'<span class="play">'+PLAY+'</span>':'')+(d.capa?'<img src="'+esc(d.capa)+'" alt="'+esc(d.title)+'" loading="lazy">':'')+'</div><div class="body">'+(d.cliente?'<div class="client">'+esc(d.cliente)+'</div>':'')+'<h3>'+esc(d.title)+'</h3>'+credHtml+'</div>';

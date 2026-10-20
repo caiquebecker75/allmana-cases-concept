@@ -35,7 +35,7 @@ video{width:100%;max-height:72vh;border-radius:14px;background:#000;display:bloc
  var v=q("v"),t=q("t"),c=q("c"),cr=q("cr");
  if(t){document.getElementById("title").textContent=t;document.title="Allmana · "+t;}
  if(c)document.getElementById("client").textContent=c;
- if(cr)document.getElementById("credit").innerHTML="<b>Produção:</b> "+cr.replace(/</g,"&lt;");
+ if(cr)document.getElementById("credit").innerHTML="<b>Créditos:</b> "+cr.replace(/</g,"&lt;");
  var vid=document.getElementById("v");
  if(v){vid.src=v;var p=vid.play();if(p&&p.catch)p.catch(function(){});}
  else{document.getElementById("note").innerHTML='Vídeo não encontrado.';}
