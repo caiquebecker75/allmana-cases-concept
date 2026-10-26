@@ -1,110 +1,14 @@
 [
-{
-"title": "Programa de Excelência",
-"categoria": "Premiação",
-"cliente": "ArcelorMittal",
-"local": "",
-"ano": "",
-"capa": "img/arcelormittal.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/arcelormittal.mp4"
-},
-{
-"title": "Asaas Conect",
-"categoria": "Convenção",
-"cliente": "Asaas",
-"local": "",
-"ano": "",
-"capa": "img/asaas.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/asaas.mp4"
-},
-{
-"title": "Convenção de Vendas",
-"categoria": "Convenção",
-"cliente": "Cultura Inglesa",
-"local": "",
-"ano": "",
-"capa": "img/culturainglesa.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/culturainglesa.mp4"
-},
-{
-"title": "Minicampeões",
-"categoria": "Experiência",
-"cliente": "Grupo DPSP",
-"local": "",
-"ano": "",
-"capa": "img/dpsp.jpg",
-"video": ""
-},
-{
-"title": "Experiência Embark Beyond",
-"categoria": "Experiência",
-"cliente": "Embark Beyond",
-"local": "",
-"ano": "",
-"capa": "img/embark.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/embark.mp4"
-},
-{
-"title": "Estande Bett Educar",
-"categoria": "Experiência",
-"cliente": "Forma Turismo",
-"local": "",
-"ano": "",
-"capa": "img/forma.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/forma.mp4"
-},
-{
-"title": "Copa FVC Bariloche",
-"categoria": "Incentivo",
-"cliente": "Grupo Boticário",
-"local": "",
-"ano": "",
-"capa": "img/boticario-bariloche.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/boticario-bariloche.mp4"
-},
-{
-"title": "Encontro VD Natal",
-"categoria": "Convenção",
-"cliente": "Grupo Boticário",
-"local": "",
-"ano": "",
-"capa": "img/boticario-vdnatal.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/boticario-vdnatal.mp4"
-},
-{
-"title": "Força VD Foz do Iguaçu",
-"categoria": "Convenção",
-"cliente": "Grupo Boticário",
-"local": "",
-"ano": "",
-"capa": "img/boticario-foz.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/boticario-foz.mp4"
-},
-{
-"title": "Consegne Salvador",
-"categoria": "Premiação",
-"cliente": "MAG Seguros",
-"local": "",
-"ano": "",
-"capa": "img/mag.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/mag.mp4"
-},
-{
-"title": "Convenção Vedacit",
-"categoria": "Convenção",
-"cliente": "Vedacit",
-"local": "",
-"ano": "",
-"capa": "img/vedacit.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/vedacit.mp4"
-},
-{
-"title": "Top Club Bento Gonçalves",
-"categoria": "Incentivo",
-"cliente": "Whirlpool",
-"local": "",
-"ano": "",
-"capa": "img/whirlpool.jpg",
-"video": "https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/whirlpool.mp4"
-}
+{"title":"Programa de Excelência","categoria":"Mini Meeting","cliente":"ArcelorMittal","credito":"Captação @william_lucas_img · Curadoria técnica @bck_business","capa":"img/arcelormittal.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/arcelormittal.mp4"},
+{"title":"Asaas Conect","categoria":"Corporativo","cliente":"Asaas","credito":"@vatanabecruz","capa":"img/asaas.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/asaas.mp4"},
+{"title":"Convenção de Vendas","categoria":"Convenção","cliente":"Cultura Inglesa","credito":"","semCredito":true,"capa":"img/culturainglesa.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/culturainglesa.mp4"},
+{"title":"Estande Bett Educar","categoria":"Estandes","cliente":"Forma Turismo","credito":"@formaturismo","capa":"img/forma.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/forma.mp4"},
+{"title":"Copa FVC Bariloche","categoria":"Incentivo","cliente":"Grupo Boticário","credito":"@grupoboticário","capa":"img/boticario-bariloche.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/boticario-bariloche.mp4"},
+{"title":"Encontro VD Natal","categoria":"Convenção","cliente":"Grupo Boticário","credito":"","semCredito":true,"capa":"img/boticario-vdnatal.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/boticario-vdnatal.mp4"},
+{"title":"Força VD Foz do Iguaçu","categoria":"Incentivo","cliente":"Grupo Boticário","credito":"@grupoboticário","capa":"img/boticario-foz.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/boticario-foz.mp4"},
+{"title":"Consegnne Salvador","categoria":"Estandes","cliente":"MAG Seguros","credito":"","semCredito":true,"capa":"img/mag.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/mag.mp4"},
+{"title":"Convenção Vedacit","categoria":"Convenção","cliente":"Vedacit","credito":"@vatanabecruz","capa":"img/vedacit.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/vedacit.mp4"},
+{"title":"Top Club Serra Gaúcha","categoria":"Incentivo","cliente":"Whirlpool","credito":"@brosfilms_","capa":"img/whirlpool.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/whirlpool.mp4"},
+{"title":"+Top e Top Trade Chapada dos Guimarães","categoria":"Incentivo","cliente":"Whirlpool","credito":"@brosfilms_","capa":"img/chapada.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/chapada.mp4"},
+{"title":"Asset Tour","categoria":"Mini Meeting","cliente":"Bradesco","credito":"","semCredito":true,"capa":"img/bradesco.jpg","video":"https://github.com/caiquebecker75/allmana-cases-concept/releases/download/videos/bradesco.mp4"}
 ]
